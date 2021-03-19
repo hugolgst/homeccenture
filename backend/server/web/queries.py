@@ -8,4 +8,13 @@ class Queries:
         self.config = config
 
     def register_routes(self, app):
-        app.add_routes([])
+        app.add_routes(
+            [
+                web.post("/register", self.register),
+            ]
+        )
+
+    # curl -X POST localhost:8080/register
+    async def register(self, request):
+        data = await request.post()
+        return web.json_response({ "test" : "hello world" })

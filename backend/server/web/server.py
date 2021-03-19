@@ -58,7 +58,7 @@ class WebAPI:
 
     async def auth_middleware(self, app, handler):
         async def middleware(request):
-            request.password = request.headers.get("Authorization", None)
+            request.token = request.headers.get("Authorization", None)
             return await handler(request)
 
         return middleware
