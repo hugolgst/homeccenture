@@ -5,4 +5,6 @@ id,type,description,url,score,fool_descrition
 3,"sport","climbing","https://totem.ch/?ec",4,"Indoor climbing gym"
 4,"meditation","yoga","https://totem.ch/yoga#studio?smooth",4,"relaxation in a yog room"
 5,"cuisine","recette","https://www.fitnessmith.fr/recette-fitness-salade-au-boeuf-sans-glucides/",5,"beef salad"
-6,"cuisine","recette","https://www.fitnessmith.fr/recette-fitness-le-cordon-bleu/", 3, "Fitness recipe: the cordon bleu"
+6,"cuisine","recette","https://www.fitnessmith.fr/recette-fitness-le-cordon-bleu/",3,"Fitness recipe: the cordon bleu"
+7,"marche","parcours","https://www.zurichvitaparcours.ch/fr/Finder/Details/aae1af77-9738-4d85-9ef3-693dce8a8afa",3,"Short walk"
+8,"croisière","bateaux",https://www.archers.ch/,5,"boat trip in leman"
