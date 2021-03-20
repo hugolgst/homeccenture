@@ -1,9 +1,10 @@
+from storage import userdb, get_path
 from aiohttp import web
 import errors
-from storage import userdb
+import pandas
 import time
 import jwt
-
+import csv
 
 class Queries:
     def __init__(self, config):
@@ -20,6 +21,7 @@ class Queries:
                 web.post("/register", self.register),
                 web.post("/unregister", self.unregister),
                 web.post("/logout", self.logout),
+                web.get("/activity", self.fetch_activity),
             ]
         )
 
@@ -39,7 +41,7 @@ class Queries:
         token = jwt.encode(payload, self.JWT_SECRET, self.JWT_ALGORITHM)
         return web.json_response({"registered": True, "token": token.decode("utf-8")})
 
-    # curl -X POST localhost:8080/unregister -H "Authorization:eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6MH0.BzrKJpA15ObR-l-YM5TssVAwGAuOns0tLVg6MjqvOTs"
+    # curl -X POST localhost:8080/unregister -H "Authorization:TOKEN"
     async def unregister(self, request):
         if request.id != None:
             if str(request.id) in userdb:
@@ -48,12 +50,29 @@ class Queries:
             else:
                 raise errors.Unauthorized("Not registered")
         else:
-            raise errors.Unauthorized("No token to blacklist")
+            raise errors.Unauthorized("A valid token is required")
 
-    # curl -X POST localhost:8080/logout -H "Authorization:eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6MH0.BzrKJpA15ObR-l-YM5TssVAwGAuOns0tLVg6MjqvOTs"
+    # curl -X POST localhost:8080/logout -H "Authorization:TOKEN"
     async def logout(self, request):
         if request.id != None:
             self.EXPIRED_TOKENS.add(request.headers.get("Authorization", None))
             return web.json_response({"disconnected": True})
         else:
-            raise errors.Unauthorized("No token to blacklist")
+            raise errors.Unauthorized("A valid token is required")
+
+    # curl "http://localhost:8080/activity?itemid=3" -H "Authorization:TOKEN"
+    async def fetch_activity(self, request):
+        if request.id == None:
+            raise errors.Unauthorized("A valid token is required")
+
+        df = pandas.read_csv(get_path("../../activities.csv"), index_col="id")
+        activity_id = int(request.rel_url.query["itemid"])
+        if activity_id >= len(df):
+            raise errors.UserError("this id is too big")
+
+        with open(get_path("../../interactions.csv"), 'a') as output_csv:
+            writer = csv.writer(output_csv)
+            writer.writerow([request.id, activity_id, 1, int(time.time())])
+        
+        output = df.iloc[activity_id].to_json()
+        return web.Response(text=output)
