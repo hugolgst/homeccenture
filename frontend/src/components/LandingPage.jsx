@@ -1,10 +1,15 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Flex, Heading, Text, Box } from '@chakra-ui/react'
 import { useHistory } from 'react-router-dom'
 import { NextButton } from './Elements.jsx'
 
 const LandingPage = () => {
   const history = useHistory()
+  useEffect(() => {
+    if (localStorage.getItem('homeccenture-token')) {
+      history.push('/home')
+    }
+  }, [])
 
   return <Box
     w="100vw"

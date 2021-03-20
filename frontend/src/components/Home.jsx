@@ -2,11 +2,13 @@ import React, { useEffect } from 'react'
 import { useHistory } from 'react-router-dom'
 import { Box, Heading, Flex, Text, CircularProgress, CircularProgressLabel, useToast } from '@chakra-ui/react'
 import { ArrowForwardIcon } from '@chakra-ui/icons'
+import { getSuggestion } from '../api'
 
 const Home = () => {
   const history = useHistory()
   const toast = useToast()
-  useEffect(() => {
+
+  useEffect(async () => {
     if (!localStorage.getItem('homeccenture-token')) {
       toast({
         title: 'You are not logged in.',
@@ -15,6 +17,8 @@ const Home = () => {
       })
       history.push('/')
     }
+
+    console.log(await getSuggestion())
   }, [])
 
   return <Box
