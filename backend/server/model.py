@@ -1,5 +1,6 @@
 import pandas as pd
 import numpy as np
+from storage import get_path
 import torch
 from torch.autograd import Variable
 import torch.nn.functional as Functional
@@ -7,11 +8,11 @@ from tqdm import tqdm
 import matplotlib.pyplot as plt
 from storage import get_path
 
-activites = pd.read_csv(get_path('../../activities.csv'))
+activites = pd.read_csv(get_path("../../activities.csv"))
 activites.head()
 
 # Read the CSV of interactions and sort it by timestamp
-data = pd.read_csv(get_path('../../interactions.csv'))
+data = pd.read_csv(get_path("../../interactions.csv"))
 data_sorted = data.sort_values("timestamp")
 data_sorted.head()
 
@@ -181,4 +182,12 @@ def predict(user_id):
     tuple_predictions = [(i, predictions[i].item()) for i in range(len(predictions))]
     return sorted(tuple_predictions, key=lambda tup: tup[1], reverse=True)
 
+<<<<<<< Updated upstream
 print(predict(1))
+=======
+
+def get_item(item_id):
+    return activites.loc[item_id].to_dict()
+
+print(predict(3))
+>>>>>>> Stashed changes
