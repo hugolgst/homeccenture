@@ -1,6 +1,6 @@
 import React from 'react'
-import { Box, Heading, Flex, Input, Text, Select } from '@chakra-ui/react'
-import { NextButton } from './Elements.jsx'
+import { Box, Heading, Flex, Input, Text, Select, Button } from '@chakra-ui/react'
+import { BackButton, NextButton } from './Elements.jsx'
 import { useHistory } from 'react-router-dom'
 
 const Register = () => {
@@ -28,6 +28,9 @@ const Register = () => {
                 m="5px 5vw"
                 marginBottom="2vh"
                 w="70vw"
+                _focus={{
+                    outlineColor: ''
+                }}
             />
 
             <Text
@@ -40,6 +43,9 @@ const Register = () => {
                 m="5px 5vw"
                 marginBottom="2vh"
                 w="70vw"
+                _focus={{
+                    outlineColor: ''
+                }}
             />
 
             <Text
@@ -52,6 +58,9 @@ const Register = () => {
                 m="5px 5vw"
                 marginBottom="2vh"
                 w="70vw"
+                _focus={{
+                    outlineColor: ''
+                }}
             />
 
             <Text
@@ -62,6 +71,9 @@ const Register = () => {
                 backgroundColor="white"
                 borderRadius="25px"
                 marginBottom="2vh"
+                _focus={{
+                    outlineColor: ''
+                }}
             >
                 <option value="option1">8am</option>
                 <option value="option2">12am</option>
@@ -78,13 +90,22 @@ const Register = () => {
                 m="5px 5vw"
                 marginBottom="2vh"
                 w="70vw"
+                _focus={{
+                    outlineColor: ''
+                }}
+            />
+
+            <BackButton
+                onClick={() => {
+                    history.push('/')
+                }}
             />
 
             <NextButton
                 onClick={() => {
-                    history.push('/register')
+                    history.push('/home')
                 }}
-            >Next</NextButton>
+            />
         </Flex>
     </Box>
 }
