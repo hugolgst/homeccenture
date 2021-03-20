@@ -90,5 +90,3 @@ class Queries:
                 continue
             if proba > best_proba:
                 best_choice, best_proba = item_id, proba
-    
-        
