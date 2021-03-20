@@ -9,7 +9,7 @@ logger = logging.getLogger(__name__)
 class Config:
 
     # hardcoded
-    __title__ = "Bonzen"
+    __title__ = "Homeccenture"
     __author__ = "Nixos GANG"
     __license__ = "GNU GPL3"
     __version__ = "0.0.0"
