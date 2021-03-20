@@ -15,7 +15,7 @@ const LandingPage = () => {
       alignItems="center"
       m="0 5vw"
     >
-      <Heading m="3vh 20px">Welcome.</Heading>
+      <Heading m="4vh 20px">Welcome.</Heading>
 
       <Text
         textAlign="center"
