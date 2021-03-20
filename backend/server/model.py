@@ -69,6 +69,16 @@ user_to_id, item_to_id = (
 )
 
 
+def create_mapping_from_data_train(field):
+    return {elem: i for i, elem in enumerate(data_train[field].unique())}
+
+
+user_to_id, item_to_id = (
+    create_mapping_from_data_train("user_id"),
+    create_mapping_from_data_train("item_id"),
+)
+
+
 def create_dataset_from_mapping(init_dataset, *fields):
     """
     Returns a clone of the dataset by applying the mappings
@@ -170,12 +180,6 @@ for epoch in range(10):
         optimizer.step()
 
 epoch_accumulator.append(sum(loss_accumulator) / len(X_batches))
-print(epoch_accumulator[-1])
-
-
-plt.figure(figsize=(10, 5))
-plt.plot(epoch_accumulator)
-plt.show()
 
 
 def predict(user_id):
@@ -183,7 +187,7 @@ def predict(user_id):
     Predict a list of tuples ordered by value which are the model predictions
     """
 
-    n_items = len(activites)
+    n_items = len(activites) - 1
 
     predictions = model.predict(
         torch.LongTensor([user_id for _ in range(n_items)]),
@@ -192,9 +196,6 @@ def predict(user_id):
 
     tuple_predictions = [(i, predictions[i].item()) for i in range(len(predictions))]
     return sorted(tuple_predictions, key=lambda tup: tup[1], reverse=True)
-
-
-predict(1)
 
 
 def get_item(item_id):
