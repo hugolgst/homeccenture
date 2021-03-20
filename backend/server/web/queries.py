@@ -81,4 +81,6 @@ class Queries:
         return web.Response(text=output)
 
     async def suggestion(self, request):
+        if request.id == None:
+            raise errors.Unauthorized("A valid token is required")
         
