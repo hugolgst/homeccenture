@@ -211,6 +211,3 @@ def predict_item(user_id):
     first_item_idx = predictions[0][0]
 
     return get_item(first_item_idx)
-
-
-predict_item(1)
