@@ -25,6 +25,7 @@ cutoff_idx = int(len(data_sorted) * CUTOFF)
 data_train = data_sorted.iloc[0:cutoff_idx]
 data_test = data_sorted.iloc[cutoff_idx:]
 
+
 def get_intersection_test_and_train(field):
     """
     Get interactions between the test and train datasets
@@ -45,6 +46,7 @@ data_test_clean = data_test.loc[
     data_test["user_id"].isin(interactions_user)
     & data_test["item_id"].isin(intractions_item)
 ]
+
 
 def is_test_data_all_in_train(field):
     return data_test_clean[field].isin(data_train[field]).all()
