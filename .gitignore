@@ -1,3 +1,5 @@
+backend/server/storage/files/*
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
@@ -127,5 +129,4 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
-
 frontend/node_modules
