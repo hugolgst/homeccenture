@@ -182,12 +182,5 @@ def predict(user_id):
     tuple_predictions = [(i, predictions[i].item()) for i in range(len(predictions))]
     return sorted(tuple_predictions, key=lambda tup: tup[1], reverse=True)
 
-<<<<<<< Updated upstream
-print(predict(1))
-=======
-
 def get_item(item_id):
     return activites.loc[item_id].to_dict()
-
-print(predict(3))
->>>>>>> Stashed changes

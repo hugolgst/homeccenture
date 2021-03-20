@@ -1,5 +1,6 @@
 from storage import userdb, get_path
 from aiohttp import web
+from model import get_item
 import errors
 import pandas
 import time
@@ -23,6 +24,7 @@ class Queries:
                 web.post("/unregister", self.unregister),
                 web.post("/logout", self.logout),
                 web.get("/activity", self.fetch_activity),
+                web.get("/suggestion", self.suggestion)
             ]
         )
 
@@ -77,3 +79,6 @@ class Queries:
 
         output = df.iloc[activity_id].to_json()
         return web.Response(text=output)
+
+    async def suggestion(self, request):
+        
