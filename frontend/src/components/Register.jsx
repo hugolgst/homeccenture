@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { Box, Heading, Flex, Input, Text, Select, useToast } from '@chakra-ui/react'
 import { BackButton, NextButton } from './Elements.jsx'
 import { useHistory } from 'react-router-dom'
@@ -13,16 +13,6 @@ const Register = () => {
     const [hours, setHours] = useState('8am')
     const [notifOccurences, setNotifOccurences] = useState()
 
-    useEffect(() => {
-        registerUser({
-            name: 'Hugo',
-            age: 18,
-            activities: ['sport'],
-            hours: '6pm',
-            notification_occurences: 3
-        })
-    }, [])
-    
     return <Box
         w="100vw"
         h="100vh"

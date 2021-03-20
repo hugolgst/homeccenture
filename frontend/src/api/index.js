@@ -6,3 +6,11 @@ export const registerUser = async (data) => {
         body: JSON.stringify(data)
     }).then(response => response.json())
 }
+
+export const getSuggestion = async () => {
+    return await fetch(`${API_URL}/suggestion`, {
+        headers: {
+            'Authorization': localStorage.getItem('homeccenture-token')
+        }
+    }).then(response => response.json())
+}
