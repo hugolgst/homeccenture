@@ -45,4 +45,3 @@ def get_path(name):
 
 
 users = SavedDict("files/users.json")
-users["thomas"] = {"id" : 12937462672}
