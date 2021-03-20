@@ -84,4 +84,6 @@ class Queries:
         if request.id == None:
             raise errors.Unauthorized("A valid token is required")
     
-        predict(id)
+        for i, (item_id, proba) in enumerate(predict(request.id)):
+
+            print(i, item_id, proba)
