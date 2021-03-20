@@ -6,12 +6,11 @@ import torch.nn.functional as Functional
 from tqdm import tqdm
 import matplotlib.pyplot as plt
 
-
-activites = pd.read_csv("../activities.csv")
+activites = pd.read_csv("activities.csv")
 activites.head()
 
 # Read the CSV of interactions and sort it by timestamp
-data = pd.read_csv("../interactions.csv")
+data = pd.read_csv("interactions.csv")
 data_sorted = data.sort_values("timestamp")
 data_sorted.head()
 
@@ -69,16 +68,6 @@ user_to_id, item_to_id = (
 )
 
 
-def create_mapping_from_data_train(field):
-    return {elem: i for i, elem in enumerate(data_train[field].unique())}
-
-
-user_to_id, item_to_id = (
-    create_mapping_from_data_train("user_id"),
-    create_mapping_from_data_train("item_id"),
-)
-
-
 def create_dataset_from_mapping(init_dataset, *fields):
     """
     Returns a clone of the dataset by applying the mappings
@@ -121,9 +110,9 @@ class NNRecommender(torch.nn.Module):
         self.linear_1 = torch.nn.Linear(n_factors * 2, hidden_1)
         self.linear_2 = torch.nn.Linear(hidden_1, dim_out)
 
-    def forward(self, user, item):
-        users_embedding = self.user_factors(user)
-        items_embedding = self.item_factors(item)
+    def forward(self, user_ids, item_ids):
+        users_embedding = self.user_factors(user_ids)
+        items_embedding = self.item_factors(item_ids)
 
         x = torch.cat([users_embedding, items_embedding,], 1)
         h1_relu = Functional.relu(self.linear_1(x))
@@ -187,7 +176,7 @@ def predict(user_id):
     Predict a list of tuples ordered by value which are the model predictions
     """
 
-    n_items = len(activites) - 1
+    n_items = len(data_train["item_id"].unique())
 
     predictions = model.predict(
         torch.LongTensor([user_id for _ in range(n_items)]),
@@ -211,3 +200,6 @@ def predict_item(user_id):
     first_item_idx = predictions[0][0]
 
     return get_item(first_item_idx)
+
+
+predict_item(1)
