@@ -1,10 +1,16 @@
 # frontend
-## Develop environment
+## Getting started
+```
+npm i
+```
+
+Start the application
+### Develop environment
 ```
 npm start
 ```
 
-## Production environment
+### Production environment
 ```
 npm run build
 ```
