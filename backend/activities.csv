@@ -1,6 +1,8 @@
-id,type,description,url,lattitude,longitude,score
-0,"sport","climbing","https://www.facebook.com/groups/escaladeromandie/permalink/1940713082699987/",46.51294663998742, 6.624772365451545,1
-1,"sport","badminton","http://www.badmintonlausanne.ch/",46.528290317723126,6.601944654330227,4
-2,"sport","swimming pool","https://www.lausanne-tourisme.ch/fr/decouvrir/mon-repos-piscine-couverte/",46.52247368737829,6.605101246504216,3
-3,"sport","climbing","https://totem.ch/?ec",46.516749454862854, 6.548327486660693,4
-4,"meditation","yoga","https://totem.ch/yoga#studio?smooth",46.516749454862854,6.548327486660693,4
+id,type,description,url,score,fool_descrition
+0,"sport","climbing","https://www.facebook.com/groups/escaladeromandie/permalink/1940713082699987/",1,"Safe climbing in nature"
+1,"sport","badminton","http://www.badmintonlausanne.ch/",4,"Badminton hall with the possibility of doing higher level training"
+2,"sport","swimming pool","https://www.lausanne-tourisme.ch/fr/decouvrir/mon-repos-piscine-couverte/",3, "Swimming pool with the possibility to relax afterwards in the restaurants"
+3,"sport","climbing","https://totem.ch/?ec",4,"Indoor climbing gym"
+4,"meditation","yoga","https://totem.ch/yoga#studio?smooth",4,"relaxation in a yog room"
+5,"cuisine","recette","https://www.fitnessmith.fr/recette-fitness-salade-au-boeuf-sans-glucides/",5,"beef salad"
+6,"cuisine","recette","https://www.fitnessmith.fr/recette-fitness-le-cordon-bleu/", 3, "Fitness recipe: the cordon bleu"
