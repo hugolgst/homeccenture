@@ -1,7 +1,12 @@
 import { ChakraProvider, extendTheme } from '@chakra-ui/react'
 import React from 'react'
-import Home from './components/Home.jsx'
 import LandingPage from './components/LandingPage.jsx'
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route
+} from 'react-router-dom'
+import Register from './components/Register.jsx'
 
 const theme = extendTheme({
   fonts: {
@@ -20,7 +25,17 @@ const theme = extendTheme({
 
 const App = () => {
   return <ChakraProvider theme={theme}>
-    <LandingPage />
+    <Router>
+      <Switch>
+        <Route path="/register">
+          <Register />
+        </Route>
+
+        <Route path="/">
+          <LandingPage />
+        </Route>
+      </Switch>
+    </Router>
   </ChakraProvider>
 }
 

@@ -1,8 +1,11 @@
 import React from 'react'
 import { Flex, Heading, Text, Button, Box } from '@chakra-ui/react'
 import { ArrowForwardIcon } from '@chakra-ui/icons'
+import { useHistory } from 'react-router-dom'
 
 const LandingPage = () => {
+  const history = useHistory()
+
   return <Box
     w="100vw"
     h="100vh"
@@ -32,6 +35,9 @@ const LandingPage = () => {
         color="white"
         _hover={{
           backgroundColor: 'bonzai.500'
+        }}
+        onClick={() => {
+          history.push('/register')
         }}
       >Next</Button>
     </Flex>
