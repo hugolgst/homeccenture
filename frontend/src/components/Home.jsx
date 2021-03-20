@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useHistory } from 'react-router-dom'
 import { Box, Heading, Flex, Text, CircularProgress, CircularProgressLabel, useToast } from '@chakra-ui/react'
 import { ArrowForwardIcon } from '@chakra-ui/icons'
@@ -7,6 +7,7 @@ import { getSuggestion } from '../api'
 const Home = () => {
   const history = useHistory()
   const toast = useToast()
+  const [suggestion, setSuggestion] = useState()
 
   useEffect(async () => {
     if (!localStorage.getItem('homeccenture-token')) {
@@ -18,7 +19,10 @@ const Home = () => {
       history.push('/')
     }
 
-    console.log(await getSuggestion())
+    setSuggestion(await getSuggestion())
+
+    // const trigger = new TimestampTrigger(timestamp)
+    // navigator.serviceWorker.getRegistration().then((reg) => reg.showNotification(title, {...options, showTrigger: trigger}))
   }, [])
 
   return <Box
@@ -33,8 +37,12 @@ const Home = () => {
       alignItems="center"
       m="0 5vw"
     >
-      <Heading m="4vh 20px" marginBottom="1vh">Hi, {'{name}'}</Heading>
-      <Text marginBottom="45px">What about {'{x}'} at 6pm?</Text>
+      {suggestion ? <>
+        <Heading m="4vh 20px" marginBottom="1vh">Hi, {suggestion['user']}</Heading>
+        <Text marginBottom="45px">What about {suggestion['desc']} at 6pm?</Text>
+      </> : <>
+      
+      </>}
 
       <CircularProgress value={80} color="bonzai.500">
         <CircularProgressLabel>80%</CircularProgressLabel>
