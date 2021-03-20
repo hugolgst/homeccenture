@@ -11,7 +11,9 @@ import csv
 class Queries:
     def __init__(self, config):
         self.config = config
-        self.activities_df = pandas.read_csv(get_path("../../activities.csv"), index_col="id")
+        self.activities_df = pandas.read_csv(
+            get_path("../../activities.csv"), index_col="id"
+        )
 
         # todo: read from config
         self.JWT_ALGORITHM = "HS256"
@@ -25,14 +27,22 @@ class Queries:
                 web.post("/unregister", self.unregister),
                 web.post("/logout", self.logout),
                 web.get("/activity", self.fetch_activity),
-                web.get("/suggestion", self.suggestion)
+                web.get("/suggestion", self.suggestion),
             ]
         )
 
     # curl -X POST -d "name=thomas" -d "age=18" -d "activities=['sport']" -d "hours=[]" localhost:8080/register
     async def register(self, request):
         data = await request.json()
-        user = dict({"name": None, "age": None, "activities": None, "hours": None, "notification_occurences" : None})
+        user = dict(
+            {
+                "name": None,
+                "age": None,
+                "activities": None,
+                "hours": None,
+                "notification_occurences": None,
+            }
+        )
         for key in user:
             if not key in data:
                 print("MISSING KEY:", key)
@@ -90,7 +100,14 @@ class Queries:
                 continue
             if proba > best_proba:
                 best_choice, best_proba = item_id, proba
-        
+
         activity = self.activities_df.iloc[best_choice]
 
-        return web.json_response({ "user": userdb[request.id]["name"], "name" : activity["description"], "desc": activity["full_description"], "lat": None, "long": None })
+        return web.json_response(
+            {
+                "user": userdb[request.id]["name"],
+                "name": activity["description"],
+                "desc": activity["full_description"],
+                "url": activity["url"],
+            }
+        )
