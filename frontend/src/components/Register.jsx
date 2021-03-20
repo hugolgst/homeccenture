@@ -1,10 +1,21 @@
-import React from 'react'
-import { Box, Heading, Flex, Input, Text, Select, Button } from '@chakra-ui/react'
+import React, { useEffect } from 'react'
+import { Box, Heading, Flex, Input, Text, Select } from '@chakra-ui/react'
 import { BackButton, NextButton } from './Elements.jsx'
 import { useHistory } from 'react-router-dom'
+import { registerUser } from '../api'
 
 const Register = () => {
     const history = useHistory()
+
+    useEffect(() => {
+        registerUser({
+            name: 'Hugo',
+            age: 18,
+            activities: ['sport'],
+            hours: '6pm',
+            notification_occurences: 3
+        })
+    }, [])
     
     return <Box
         w="100vw"
