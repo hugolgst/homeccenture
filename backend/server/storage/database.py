@@ -37,7 +37,7 @@ class SavedDict(collections.abc.MutableMapping):
         return len(self.store)
 
     def _keytransform(self, key):
-        return key
+        return str(key)
 
 
 def get_path(name):

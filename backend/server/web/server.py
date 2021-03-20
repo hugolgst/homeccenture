@@ -1,8 +1,9 @@
-import aiohttp_cors
+import jwt
+import errors
 import logging
+import aiohttp_cors
 from aiohttp import web
 from .queries import Queries
-from errors import UserError
 
 logger = logging.getLogger(__name__)
 
@@ -22,7 +23,8 @@ class WebAPI:
                 )
             },
         )
-        Queries(config).register_routes(self.app)
+        self.queries = Queries(config)
+        self.queries.register_routes(self.app)
         self.app.on_response_prepare.append(self.on_prepare)
         for route in list(self.app.router.routes()):
             cors.add(route)
@@ -49,7 +51,7 @@ class WebAPI:
             status = 500
 
         except Exception as exception:
-            if not isinstance(exception, UserError):
+            if not isinstance(exception, errors.UserError):
                 logger.exception(exception)
             message = exception.args[0]
             status = 500
@@ -58,7 +60,21 @@ class WebAPI:
 
     async def auth_middleware(self, app, handler):
         async def middleware(request):
-            request.token = request.headers.get("Authorization", None)
+            request.id = None
+            jwt_token = request.headers.get("Authorization", None)
+            if jwt_token:
+                try:
+                    if jwt_token in self.queries.EXPIRED_TOKENS:
+                        raise errors.UserError("blacklisted token")
+                    payload = jwt.decode(
+                        jwt_token,
+                        self.queries.JWT_SECRET,
+                        algorithms=[self.queries.JWT_ALGORITHM],
+                    )
+                    request.id = payload["id"]
+                except (jwt.DecodeError, jwt.ExpiredSignatureError):
+                    pass
+
             return await handler(request)
 
         return middleware

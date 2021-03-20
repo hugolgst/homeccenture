@@ -1,2 +1,2 @@
 from .config import TomlConfig
-from .database import users
+from .database import users as userdb

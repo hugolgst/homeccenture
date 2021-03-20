@@ -14,5 +14,4 @@ def csv_to_json(name) -> json:
     data_json = json.loads(json.dumps(results))
     return data_json
 
-
 x = csv_to_json("data.csv")
