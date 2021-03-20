@@ -6,4 +6,4 @@ matplotlib
 toml
 aiohttp
 aiohttp_cors
-pyjwt
+pyjwt==1.7.1
