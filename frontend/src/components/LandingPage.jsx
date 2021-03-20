@@ -30,6 +30,9 @@ const LandingPage = () => {
         rightIcon={<ArrowForwardIcon />}
         backgroundColor="bonzai.400"
         color="white"
+        _hover={{
+          backgroundColor: 'bonzai.500'
+        }}
       >Next</Button>
     </Flex>
   </Box>
