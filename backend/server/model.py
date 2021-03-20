@@ -130,7 +130,7 @@ loss_function = torch.nn.MSELoss()
 optimizer = torch.optim.SGD(model.parameters(), lr=1e-6)
 
 epoch_accumulator = []
-for epoch in range(10):
+for epoch in range(50):
     # Decide that the size of the batches will be 32
     batch_size = 2
     split_size = len(X_train) // batch_size
