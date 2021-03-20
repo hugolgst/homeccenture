@@ -1,7 +1,7 @@
 import React from 'react'
-import { Flex, Heading, Text, Button, Box } from '@chakra-ui/react'
-import { ArrowForwardIcon } from '@chakra-ui/icons'
+import { Flex, Heading, Text, Box } from '@chakra-ui/react'
 import { useHistory } from 'react-router-dom'
+import { NextButton } from './Elements.jsx'
 
 const LandingPage = () => {
   const history = useHistory()
@@ -27,19 +27,11 @@ const LandingPage = () => {
         <strong>Homeccenture</strong> uses machine learning to enlightens your home-office experience by recommending you activities.
       </Text>
 
-      <Button
-        position="absolute"
-        bottom="5vh"
-        rightIcon={<ArrowForwardIcon />}
-        backgroundColor="bonzai.400"
-        color="white"
-        _hover={{
-          backgroundColor: 'bonzai.500'
-        }}
+      <NextButton
         onClick={() => {
           history.push('/register')
         }}
-      >Next</Button>
+      >Next</NextButton>
     </Flex>
   </Box>
 }
