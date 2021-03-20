@@ -109,5 +109,6 @@ class Queries:
                 "name": activity["description"],
                 "desc": activity["full_description"],
                 "url": activity["url"],
+                "hours": userdb[request.id]["hours"],
             }
         )
