@@ -1,16 +1,18 @@
 import pandas as pd
 import numpy as np
+from storage import get_path
 import torch
 from torch.autograd import Variable
 import torch.nn.functional as Functional
 from tqdm import tqdm
 import matplotlib.pyplot as plt
+from storage import get_path
 
-activites = pd.read_csv("activities.csv")
+activites = pd.read_csv(get_path("../../activities.csv"))
 activites.head()
 
 # Read the CSV of interactions and sort it by timestamp
-data = pd.read_csv("interactions.csv")
+data = pd.read_csv(get_path("../../interactions.csv"))
 data_sorted = data.sort_values("timestamp")
 data_sorted.head()
 
@@ -22,9 +24,6 @@ cutoff_idx = int(len(data_sorted) * CUTOFF)
 # Generate the train and test data
 data_train = data_sorted.iloc[0:cutoff_idx]
 data_test = data_sorted.iloc[cutoff_idx:]
-
-data_train.shape, data_test.shape
-
 
 def get_intersection_test_and_train(field):
     """
@@ -46,9 +45,6 @@ data_test_clean = data_test.loc[
     data_test["user_id"].isin(interactions_user)
     & data_test["item_id"].isin(intractions_item)
 ]
-
-data_test_clean.shape
-
 
 def is_test_data_all_in_train(field):
     return data_test_clean[field].isin(data_train[field]).all()
@@ -186,20 +182,12 @@ def predict(user_id):
     tuple_predictions = [(i, predictions[i].item()) for i in range(len(predictions))]
     return sorted(tuple_predictions, key=lambda tup: tup[1], reverse=True)
 
+<<<<<<< Updated upstream
+print(predict(1))
+=======
 
 def get_item(item_id):
     return activites.loc[item_id].to_dict()
 
-
-def predict_item(user_id):
-    """
-    Returns the data of the item which has the best prediction score for a specific user
-    """
-
-    predictions = predict(user_id)
-    first_item_idx = predictions[0][0]
-
-    return get_item(first_item_idx)
-
-
-predict_item(1)
+print(predict(3))
+>>>>>>> Stashed changes
