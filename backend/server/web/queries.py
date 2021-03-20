@@ -84,6 +84,13 @@ class Queries:
         if request.id == None or request.id not in userdb:
             raise errors.Unauthorized("A valid token is required")
         activities = userdb[request.id]["activities"]
-        for i, (item_id, proba) in enumerate(predict(request.id)):
+        best_choice, best_proba = -1, -1
+        for item_id, proba in predict(request.id):
+            if not self.activities_df.iloc[item_id]["type"] in activities:
+                continue
+            if proba > best_proba:
+                best_choice, best_proba = item_id, proba
+        
+        activity = self.activities_df.iloc[best_choice]
 
-            print(i, item_id, proba)
+        return web.json_response({ "user": userdb[request.id]["name"], "name" : activity["description"], "desc": activity["full_descrition"] })
