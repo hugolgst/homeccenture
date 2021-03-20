@@ -3,3 +3,7 @@ torchvision==0.7.0
 pandas
 tqdm
 matplotlib
+toml
+aiohttp
+aiohttp_cors
+pyjwt
