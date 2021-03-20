@@ -1,6 +1,6 @@
 from storage import userdb, get_path
 from aiohttp import web
-from model import get_item
+from model import predict
 import errors
 import pandas
 import time
@@ -83,4 +83,5 @@ class Queries:
     async def suggestion(self, request):
         if request.id == None:
             raise errors.Unauthorized("A valid token is required")
-        
+    
+        predict(id)
