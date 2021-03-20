@@ -1,11 +1,17 @@
-import React, { useEffect } from 'react'
-import { Box, Heading, Flex, Input, Text, Select } from '@chakra-ui/react'
+import React, { useEffect, useState } from 'react'
+import { Box, Heading, Flex, Input, Text, Select, useToast } from '@chakra-ui/react'
 import { BackButton, NextButton } from './Elements.jsx'
 import { useHistory } from 'react-router-dom'
 import { registerUser } from '../api'
 
 const Register = () => {
     const history = useHistory()
+    const toast = useToast()
+    const [name, setName] = useState()
+    const [age, setAge] = useState()
+    const [categories, setCategories] = useState()
+    const [hours, setHours] = useState('8am')
+    const [notifOccurences, setNotifOccurences] = useState()
 
     useEffect(() => {
         registerUser({
@@ -42,6 +48,10 @@ const Register = () => {
                 _focus={{
                     outlineColor: ''
                 }}
+                value={name}
+                onChange={(e) => {
+                    setName(e.target.value)
+                }}
             />
 
             <Text
@@ -56,6 +66,15 @@ const Register = () => {
                 w="70vw"
                 _focus={{
                     outlineColor: ''
+                }}
+                value={age}
+                onChange={(e) => {
+                    if (isNaN(e.target.value)) {
+                        setAge(undefined)
+                        return 
+                    } 
+
+                    setAge(e.target.value)
                 }}
             />
 
@@ -72,6 +91,10 @@ const Register = () => {
                 _focus={{
                     outlineColor: ''
                 }}
+                value={categories}
+                onChange={(e) => {
+                    setCategories(e.target.value)
+                }}
             />
 
             <Text
@@ -85,10 +108,14 @@ const Register = () => {
                 _focus={{
                     outlineColor: ''
                 }}
+                value={hours}
+                onChange={(e) => {
+                    setHours(e.target.value)
+                }}
             >
-                <option value="option1">8am</option>
-                <option value="option2">12am</option>
-                <option value="option3">6pm</option>
+                <option value="8am">8am</option>
+                <option value="12am">12am</option>
+                <option value="6pm">6pm</option>
             </Select>
 
             <Text
@@ -104,6 +131,10 @@ const Register = () => {
                 _focus={{
                     outlineColor: ''
                 }}
+                value={notifOccurences}
+                onChange={(e) => {
+                    setNotifOccurences(e.target.value)
+                }}
             />
 
             <BackButton
@@ -113,8 +144,34 @@ const Register = () => {
             />
 
             <NextButton
-                onClick={() => {
-                    history.push('/home')
+                onClick={async () => {
+                    if (!name || !age || !categories || !notifOccurences) {
+                        toast({
+                            title: 'One or more of the fields is/are empty.',
+                            status: 'error',
+                            position: 'top'
+                        })
+                        return
+                    }
+
+                    const response = await registerUser({
+                        name,
+                        age,
+                        hours,
+                        activities: categories.split(','),
+                        notification_occurences: notifOccurences
+                    })
+                    
+                    if (response.registered) {
+                        toast({
+                            title: 'Registered successfully',
+                            status: 'success',
+                            position: 'top'
+                        })
+
+                        localStorage.setItem('homeccenture-token', response.token)
+                        history.push('/home')
+                    }
                 }}
             />
         </Flex>
