@@ -29,7 +29,7 @@ class Queries:
     # curl -X POST -d "name=thomas" -d "age=18" -d "activities=['sport']" -d "hours=[]" localhost:8080/register
     async def register(self, request):
         data = await request.post()
-        user = dict({"name": None, "age": None, "activities": None, "hours": None})
+        user = dict({"name": None, "age": None, "activities": None, "hours": None, "notification_occurences" : None})
         for key in user:
             if not key in data:
                 print("MISSING KEY:", key)
