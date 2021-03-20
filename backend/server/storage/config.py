@@ -12,7 +12,7 @@ class Config:
     __title__ = "Homeccenture"
     __author__ = "Nixos GANG"
     __license__ = "GNU GPL3"
-    __version__ = "0.0.0"
+    __version__ = "1.0.0"
 
     def get_path(self, name):
         return os.path.join(os.path.dirname(os.path.realpath(__file__)), name)
