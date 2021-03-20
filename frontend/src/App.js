@@ -26,6 +26,14 @@ const theme = extendTheme({
 
 const App = () => {
   return <ChakraProvider theme={theme}>
+    <style>
+    {`
+      body {
+        background-color: #EDEDED !important;
+      }
+    `}
+    </style>
+
     <Router>
       <Switch>
         <Route path="/home">
