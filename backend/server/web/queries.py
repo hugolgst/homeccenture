@@ -93,4 +93,4 @@ class Queries:
         
         activity = self.activities_df.iloc[best_choice]
 
-        return web.json_response({ "user": userdb[request.id]["name"], "name" : activity["description"], "desc": activity["full_descrition"] })
+        return web.json_response({ "user": userdb[request.id]["name"], "name" : activity["description"], "desc": activity["full_description"], "lat": None, "long": None })
