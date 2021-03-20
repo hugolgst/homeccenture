@@ -1,10 +1,11 @@
+import { ChakraProvider } from '@chakra-ui/react'
 import React from 'react'
-import { ChakraProvider, Text } from '@chakra-ui/react'
+import Home from './components/Home.jsx'
 
 const App = () => {
   return <ChakraProvider>
-    <Text>sds</Text>
+    <Home />
   </ChakraProvider>
 }
 
-export default App;
+export default App
