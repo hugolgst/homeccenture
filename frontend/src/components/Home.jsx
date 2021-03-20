@@ -1,8 +1,22 @@
-import React from 'react'
-import { Box, Heading, Flex, Text, CircularProgress, CircularProgressLabel } from '@chakra-ui/react'
+import React, { useEffect } from 'react'
+import { useHistory } from 'react-router-dom'
+import { Box, Heading, Flex, Text, CircularProgress, CircularProgressLabel, useToast } from '@chakra-ui/react'
 import { ArrowForwardIcon } from '@chakra-ui/icons'
 
 const Home = () => {
+  const history = useHistory()
+  const toast = useToast()
+  useEffect(() => {
+    if (!localStorage.getItem('homeccenture-token')) {
+      toast({
+        title: 'You are not logged in.',
+        status: 'error',
+        position: 'top'
+      })
+      history.push('/')
+    }
+  }, [])
+
   return <Box
     w="100vw"
     h="100vh"
