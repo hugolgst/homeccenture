@@ -11,7 +11,7 @@ import csv
 class Queries:
     def __init__(self, config):
         self.config = config
-        self.df = pandas.read_csv(get_path("../../activities.csv"), index_col="id")
+        self.activities_df = pandas.read_csv(get_path("../../activities.csv"), index_col="id")
 
         # todo: read from config
         self.JWT_ALGORITHM = "HS256"
@@ -70,20 +70,20 @@ class Queries:
             raise errors.Unauthorized("A valid token is required")
 
         activity_id = int(request.rel_url.query["itemid"])
-        if activity_id >= len(self.df):
+        if activity_id >= len(self.activities_df):
             raise errors.UserError("this id is too big")
 
         with open(get_path("../../interactions.csv"), "a") as output_csv:
             writer = csv.writer(output_csv)
             writer.writerow([request.id, activity_id, 1, int(time.time())])
 
-        output = self.df.iloc[activity_id].to_json()
+        output = self.activities_df.iloc[activity_id].to_json()
         return web.Response(text=output)
 
     async def suggestion(self, request):
         if request.id == None or request.id not in userdb:
             raise errors.Unauthorized("A valid token is required")
-        userdb[request.id]
-        print(user_actions)
+        activities = userdb[request.id]["activities"]
         for i, (item_id, proba) in enumerate(predict(request.id)):
+
             print(i, item_id, proba)
