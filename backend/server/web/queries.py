@@ -6,6 +6,7 @@ import time
 import jwt
 import csv
 
+
 class Queries:
     def __init__(self, config):
         self.config = config
@@ -25,10 +26,10 @@ class Queries:
             ]
         )
 
-    # curl -X POST -d "name=thomas" -d "age=18" localhost:8080/register
+    # curl -X POST -d "name=thomas" -d "age=18" -d "activities=['sport']" -d "hours=[]" localhost:8080/register
     async def register(self, request):
         data = await request.post()
-        user = dict({"name": None, "age": None})
+        user = dict({"name": None, "age": None, "activities": None, "hours": None})
         for key in user:
             if not key in data:
                 print("MISSING KEY:", key)
@@ -70,9 +71,9 @@ class Queries:
         if activity_id >= len(df):
             raise errors.UserError("this id is too big")
 
-        with open(get_path("../../interactions.csv"), 'a') as output_csv:
+        with open(get_path("../../interactions.csv"), "a") as output_csv:
             writer = csv.writer(output_csv)
             writer.writerow([request.id, activity_id, 1, int(time.time())])
-        
+
         output = df.iloc[activity_id].to_json()
         return web.Response(text=output)
