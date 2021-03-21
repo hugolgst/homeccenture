@@ -89,7 +89,7 @@ const Register = () => {
 
             <Text
                 w="70vw"
-            >When do you want to be notified</Text>
+            >When do you want to be notified?</Text>
             <Select
                 w="70vw"
                 backgroundColor="white"
@@ -110,7 +110,7 @@ const Register = () => {
 
             <Text
                 w="70vw"
-            >How many times would you like us to notify you</Text>
+            >How many times would you like us to notify you each week?</Text>
             <Input 
                 placeholder="3" 
                 backgroundColor="white"

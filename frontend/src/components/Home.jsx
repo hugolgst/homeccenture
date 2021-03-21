@@ -54,8 +54,8 @@ const Home = () => {
         }} href={suggestion['url']}>{suggestion['desc']}</a> at 6pm?</Text>
       </> : <></>}
 
-      <CircularProgress value={80} color="bonzai.500">
-        <CircularProgressLabel>80%</CircularProgressLabel>
+      <CircularProgress value={50} color="bonzai.500">
+        <CircularProgressLabel>50%</CircularProgressLabel>
       </CircularProgress>
 
       <Text
