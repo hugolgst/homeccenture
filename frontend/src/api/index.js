@@ -1,4 +1,4 @@
-const API_URL = 'http://localhost:8080'
+const API_URL = 'http://192.168.1.2:8080'
 
 export const registerUser = async (data) => {
     return await fetch(`${API_URL}/register`, {

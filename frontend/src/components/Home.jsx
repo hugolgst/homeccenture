@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react'
-import { useHistory } from 'react-router-dom'
+import { Link, useHistory } from 'react-router-dom'
 import { Box, Heading, Flex, Text, CircularProgress, CircularProgressLabel, useToast } from '@chakra-ui/react'
 import { ArrowForwardIcon } from '@chakra-ui/icons'
 import { getSuggestion } from '../api'
+import { result } from 'lodash'
 
 const Home = () => {
   const history = useHistory()
@@ -19,10 +20,13 @@ const Home = () => {
       history.push('/')
     }
 
-    setSuggestion(await getSuggestion())
+    const sugg = await getSuggestion()
+    setSuggestion(sugg)
 
-    // const trigger = new TimestampTrigger(timestamp)
-    // navigator.serviceWorker.getRegistration().then((reg) => reg.showNotification(title, {...options, showTrigger: trigger}))
+    toast({
+      title: `Hey Hugo! Take a break at 6pm and go to ${sugg['desc']}.`,
+      position: 'top'
+    })
   }, [])
 
   return <Box
@@ -39,10 +43,14 @@ const Home = () => {
     >
       {suggestion ? <>
         <Heading m="4vh 20px" marginBottom="1vh">Hi, {suggestion['user']}</Heading>
-        <Text marginBottom="45px">What about {suggestion['desc']} at 6pm?</Text>
-      </> : <>
-      
-      </>}
+        <Text 
+          marginBottom="45px" 
+          textAlign="center"
+          h="5vh"
+        >What about <a style={{
+          textDecoration: 'underline'
+        }} href={suggestion['url']}>{suggestion['desc']}</a> at 6pm?</Text>
+      </> : <></>}
 
       <CircularProgress value={80} color="bonzai.500">
         <CircularProgressLabel>80%</CircularProgressLabel>
