@@ -3,7 +3,6 @@ import { Link, useHistory } from 'react-router-dom'
 import { Box, Heading, Flex, Text, CircularProgress, CircularProgressLabel, useToast } from '@chakra-ui/react'
 import { ArrowForwardIcon } from '@chakra-ui/icons'
 import { getSuggestion } from '../api'
-import { result } from 'lodash'
 
 const Home = () => {
   const history = useHistory()
