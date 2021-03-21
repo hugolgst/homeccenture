@@ -4,9 +4,6 @@
   <br>
 </h1>
 
-<h1 align="center">homeccenture</h1>
-<h4 align="center">Enlightens your home-office experience.</h4>
-
 <br/><br/>
 
 ## Synopsis
