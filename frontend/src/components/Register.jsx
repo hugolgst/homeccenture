@@ -156,8 +156,16 @@ const Register = () => {
                         toast({
                             title: 'Registered successfully',
                             status: 'success',
-                            position: 'top'
+                            position: 'top',
+                            isClosable: true
                         })
+
+                        const sugg = await getSuggestion()
+                        toast({
+                            title: `Hey Hugo! Take a break at 6pm and go to ${sugg['desc']} to join Fabienne and Marc.`,
+                            position: 'top',
+                            isClosable: true,
+                          })
 
                         localStorage.setItem('homeccenture-token', response.token)
                         history.push('/home')

@@ -23,12 +23,6 @@ const Home = () => {
 
     const sugg = await getSuggestion()
     setSuggestion(sugg)
-
-    toast({
-      title: `Hey Hugo! Take a break at 6pm and go to ${sugg['desc']} to join Fabienne and Marc.`,
-      position: 'top',
-      isClosable: true,
-    })
   }, [])
 
   return <Box
@@ -62,9 +56,20 @@ const Home = () => {
         color="gray"
         textDecoration="underline"
         position="absolute"
+        right="10vw"
         bottom="8vh"
       >
         <Link to="/home/profile">View profile <ArrowForwardIcon /></Link>
+      </Text>
+
+      <Text
+        color="gray"
+        textDecoration="underline"
+        position="absolute"
+        left="10vw"
+        bottom="8vh"
+      >
+        <Link to="/home/company">View company <ArrowForwardIcon /></Link>
       </Text>
     </Flex>
   </Box>
