@@ -3,6 +3,7 @@ import { Box, Heading, Flex, Input, Text, Select, useToast } from '@chakra-ui/re
 import { BackButton, NextButton } from './Elements.jsx'
 import { useHistory } from 'react-router-dom'
 import { registerUser } from '../api'
+import { getSuggestion } from '../api'
 
 const Register = () => {
     const history = useHistory()
