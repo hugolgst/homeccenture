@@ -15,7 +15,8 @@ const Home = () => {
       toast({
         title: 'You are not logged in.',
         status: 'error',
-        position: 'top'
+        position: 'top',
+        isClosable: true,
       })
       history.push('/')
     }
@@ -24,8 +25,9 @@ const Home = () => {
     setSuggestion(sugg)
 
     toast({
-      title: `Hey Hugo! Take a break at 6pm and go to ${sugg['desc']}.`,
-      position: 'top'
+      title: `Hey Hugo! Take a break at 6pm and go to ${sugg['desc']} to join Fabienne and Marc.`,
+      position: 'top',
+      isClosable: true,
     })
   }, [])
 
@@ -61,7 +63,9 @@ const Home = () => {
         textDecoration="underline"
         position="absolute"
         bottom="8vh"
-      >View profile <ArrowForwardIcon /></Text>
+      >
+        <Link to="/home/profile">View profile <ArrowForwardIcon /></Link>
+      </Text>
     </Flex>
   </Box>
 }

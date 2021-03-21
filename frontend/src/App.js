@@ -8,6 +8,7 @@ import {
   Route
 } from 'react-router-dom'
 import Register from './components/Register.jsx'
+import Profile from './components/Profile.jsx'
 
 const theme = extendTheme({
   fonts: {
@@ -36,6 +37,10 @@ const App = () => {
 
     <Router>
       <Switch>
+        <Route path="/home/profile">
+          <Profile />
+        </Route>
+
         <Route path="/home">
           <Home />
         </Route>
